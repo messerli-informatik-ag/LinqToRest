@@ -16,3 +16,7 @@
 - Rename `QueryProviderBuilder` to `QueryableBuilder`
 - Let `QueryableBuilder` return an `IQueryable<T>` directly
 - Provide an interface for `QueryableBuilder`
+
+## TBA
+- Remove several internal classes from API
+- Make functionality classes `sealed`

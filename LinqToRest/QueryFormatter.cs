@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Messerli.LinqToRest
 {
-    internal class QueryFormatter : ExpressionVisitor
+    internal sealed class QueryFormatter : ExpressionVisitor
     {
         private StringBuilder _stringBuilder;
         private readonly Uri _root;

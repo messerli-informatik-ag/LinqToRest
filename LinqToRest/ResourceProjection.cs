@@ -1,6 +1,6 @@
 ﻿namespace Messerli.LinqToRest
 {
-    public abstract class ResourceProjection
+    internal abstract class ResourceProjection
     {
         public abstract object Value { get; }
     }

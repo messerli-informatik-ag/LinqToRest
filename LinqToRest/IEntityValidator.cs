@@ -2,7 +2,7 @@
 
 namespace Messerli.LinqToRest
 {
-    public interface IEntityValidator
+    internal interface IEntityValidator
     {
         void ValidateResourceEntity(Type type);
     }

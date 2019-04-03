@@ -32,7 +32,7 @@ namespace Messerli.LinqToRest
             }
         }
 
-        public static T ParseToEnumElement<T>(this string candidate) where T : struct
+        private static T ParseToEnumElement<T>(this string candidate) where T : struct
         {
             var parsed = candidate.TryParseEnum<T>();
 

@@ -7,7 +7,7 @@ using QueryProviderBase = Messerli.QueryProvider.QueryProvider;
 
 namespace Messerli.LinqToRest
 {
-    public class QueryableBuilder: IQueryableBuilder
+    public sealed class QueryableBuilder: IQueryableBuilder
     {
         private HttpClient _httpClient = new HttpClient();
         [CanBeNull] private Uri _uri;

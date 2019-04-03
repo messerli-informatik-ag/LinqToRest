@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Messerli.LinqToRest
 {
-    public class QueryBinder : ExpressionVisitor
+    internal sealed class QueryBinder : ExpressionVisitor
     {
         private readonly FieldProjector _fieldProjector;
         private readonly IEntityValidator _entityValidator;

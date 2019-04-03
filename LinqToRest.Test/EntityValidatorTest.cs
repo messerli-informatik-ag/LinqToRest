@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using Messerli.LinqToRest.Entities;
 using Xunit;
@@ -7,12 +8,15 @@ namespace Messerli.LinqToRest.Test
 {
     public class EntityValidatorTest
     {
+        private IQueryableBuilder _queryableBuilder =
+            new QueryableBuilder()
+                    .Root(new Uri("https://www.example.com"))
+                    .HttpClient(new HttpClientMockBuilder().Build());
 
         [Fact]
         public void ValidatesValidEntity()
         {
-            var validator = new EntityValidator();
-            validator.ValidateResourceEntity(typeof(ValidEntity));
+            _queryableBuilder.Build<ValidEntity>();
         }
 
         private class ValidEntity : IEntity
@@ -32,8 +36,7 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ValidatesValidEntityWithManyProperties()
         {
-            var validator = new EntityValidator();
-            validator.ValidateResourceEntity(typeof(ValidEntityWithManyProperties));
+            _queryableBuilder.Build<ValidEntityWithManyProperties>();
         }
 
         private class ValidEntityWithManyProperties : IEntity
@@ -61,8 +64,7 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ValidatesEmptyEntity()
         {
-            var validator = new EntityValidator();
-            validator.ValidateResourceEntity(typeof(EmptyEntity));
+            _queryableBuilder.Build<EmptyEntity>();
         }
 
         private class EmptyEntity : IEntity
@@ -74,8 +76,7 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ValidatesEntityWithOnlyMethods()
         {
-            var validator = new EntityValidator();
-            validator.ValidateResourceEntity(typeof(EntityWithOnlyMethods));
+            _queryableBuilder.Build<EntityWithOnlyMethods>();
         }
 
         private class EntityWithOnlyMethods : IEntity
@@ -91,8 +92,7 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ValidatesEntityWithOnlyStaticMethods()
         {
-            var validator = new EntityValidator();
-            validator.ValidateResourceEntity(typeof(EntityWithOnlyStaticMethods));
+            _queryableBuilder.Build<EntityWithOnlyStaticMethods>();
         }
 
         private class EntityWithOnlyStaticMethods : IEntity
@@ -108,8 +108,7 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ValidatesEntityWithPropertiesAndMethods()
         {
-            var validator = new EntityValidator();
-            validator.ValidateResourceEntity(typeof(EntityWithPropertiesAndMethods));
+            _queryableBuilder.Build<EntityWithPropertiesAndMethods>();
         }
 
         private class EntityWithPropertiesAndMethods : IEntity
@@ -147,11 +146,9 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ThrowsOnEntityWithOnlyFields()
         {
-            var validator = new EntityValidator();
-
             Assert.Throws<MalformedResourceEntityException>
             (
-                () => validator.ValidateResourceEntity(typeof(EntityWithOnlyFields))
+                () => _queryableBuilder.Build<EntityWithOnlyFields>()
             );
         }
 
@@ -169,11 +166,9 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ThrowsOnEntityWithFieldsInConstructor()
         {
-            var validator = new EntityValidator();
-
             Assert.Throws<MalformedResourceEntityException>
             (
-                () => validator.ValidateResourceEntity(typeof(EntityWithFieldsInConstructor))
+                () => _queryableBuilder.Build<EntityWithFieldsInConstructor>()
             );
         }
 
@@ -194,11 +189,9 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ThrowsOnEntityWithFieldsAndPropertiesInConstructor()
         {
-            var validator = new EntityValidator();
-
             Assert.Throws<MalformedResourceEntityException>
             (
-                () => validator.ValidateResourceEntity(typeof(EntityWithFieldsAndPropertiesInConstructor))
+                () => _queryableBuilder.Build<EntityWithFieldsAndPropertiesInConstructor>()
             );
         }
 
@@ -222,11 +215,9 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ThrowsOnEntityWithSetterProperties()
         {
-            var validator = new EntityValidator();
-
             Assert.Throws<MalformedResourceEntityException>
             (
-                () => validator.ValidateResourceEntity(typeof(EntityWithSetterProperties))
+                () => _queryableBuilder.Build<EntityWithSetterProperties>()
             );
         }
 
@@ -247,11 +238,9 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ThrowsOnEntityWithPrivateSetterProperties()
         {
-            var validator = new EntityValidator();
-
             Assert.Throws<MalformedResourceEntityException>
             (
-                () => validator.ValidateResourceEntity(typeof(EntityWithPrivateSetterProperties))
+                () => _queryableBuilder.Build<EntityWithPrivateSetterProperties>()
             );
         }
 
@@ -271,11 +260,9 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ThrowsOnEntityWithIncompleteConstructor()
         {
-            var validator = new EntityValidator();
-
             Assert.Throws<MalformedResourceEntityException>
             (
-                () => validator.ValidateResourceEntity(typeof(EntityWithIncompleteConstructor))
+                () => _queryableBuilder.Build<EntityWithIncompleteConstructor>()
             );
         }
 
@@ -298,11 +285,9 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ThrowsOnEntityWithTooLargeConstructor()
         {
-            var validator = new EntityValidator();
-
             Assert.Throws<MalformedResourceEntityException>
             (
-                () => validator.ValidateResourceEntity(typeof(EntityWithTooLargeConstructor))
+                () => _queryableBuilder.Build<EntityWithTooLargeConstructor>()
             );
         }
 
@@ -326,11 +311,9 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ThrowsOnEntityWithUnexpectedNamesInConstructor()
         {
-            var validator = new EntityValidator();
-
             Assert.Throws<MalformedResourceEntityException>
             (
-                () => validator.ValidateResourceEntity(typeof(EntityWithUnexpectedNamesInConstructor))
+                () => _queryableBuilder.Build<EntityWithUnexpectedNamesInConstructor>()
             );
         }
 
@@ -354,11 +337,9 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ThrowsOnEntityWithUnexpectedTypesInConstructor()
         {
-            var validator = new EntityValidator();
-
             Assert.Throws<MalformedResourceEntityException>
             (
-                () => validator.ValidateResourceEntity(typeof(EntityWithUnexpectedTypesInConstructor))
+                () => _queryableBuilder.Build<EntityWithUnexpectedTypesInConstructor>()
             );
         }
 
@@ -382,11 +363,9 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ThrowsOnEntityWithUnexpectedOrderInConstructor()
         {
-            var validator = new EntityValidator();
-
             Assert.Throws<MalformedResourceEntityException>
             (
-                () => validator.ValidateResourceEntity(typeof(EntityWithUnexpectedOrderInConstructor))
+                () => _queryableBuilder.Build<EntityWithUnexpectedOrderInConstructor>()
             );
         }
 
@@ -410,11 +389,9 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ThrowsOnEntityWithMultipleConstructors()
         {
-            var validator = new EntityValidator();
-
             Assert.Throws<MalformedResourceEntityException>
             (
-                () => validator.ValidateResourceEntity(typeof(EntityWithMultipleConstructors))
+                () => _queryableBuilder.Build<EntityWithMultipleConstructors>()
             );
         }
 
@@ -444,11 +421,9 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ThrowsOnEntityThatDoesNotImplementIEntity()
         {
-            var validator = new EntityValidator();
-
             Assert.Throws<MalformedResourceEntityException>
             (
-                () => validator.ValidateResourceEntity(typeof(EntityThatDoesNotImplementIEntity))
+                () => _queryableBuilder.Build<EntityThatDoesNotImplementIEntity>()
             );
         }
 
@@ -471,11 +446,9 @@ namespace Messerli.LinqToRest.Test
         [Fact]
         public void ThrowsOnEntityThatDoesNotImplementIEntityButSharesInterface()
         {
-            var validator = new EntityValidator();
-
             Assert.Throws<MalformedResourceEntityException>
             (
-                () => validator.ValidateResourceEntity(typeof(EntityThatDoesNotImplementIEntityButSharesInterface))
+                () => _queryableBuilder.Build<EntityThatDoesNotImplementIEntityButSharesInterface>()
             );
         }
 

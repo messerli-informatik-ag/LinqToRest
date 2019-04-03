@@ -10,7 +10,7 @@ using Soltys.ChangeCase;
 
 namespace Messerli.LinqToRest
 {
-    internal class FieldProjector : ExpressionVisitor
+    internal sealed class FieldProjector : ExpressionVisitor
     {
         private readonly Nominator _nominator;
         private List<FieldDeclaration> _fields;

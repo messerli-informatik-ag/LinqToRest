@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Messerli.LinqToRest
 {
-    internal class ProjectionBuilder : ExpressionVisitor
+    internal sealed class ProjectionBuilder : ExpressionVisitor
     {
         private ParameterExpression _resource;
 

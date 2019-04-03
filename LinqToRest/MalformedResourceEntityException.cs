@@ -2,7 +2,7 @@
 
 namespace Messerli.LinqToRest
 {
-    public class MalformedResourceEntityException : Exception
+    public sealed class MalformedResourceEntityException : Exception
     {
         public MalformedResourceEntityException()
         {

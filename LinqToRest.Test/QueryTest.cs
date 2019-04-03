@@ -8,7 +8,7 @@ using QueryProviderBase = Messerli.QueryProvider.QueryProvider;
 
 namespace Messerli.LinqToRest.Test
 {
-    public class QueryProviderTest
+    public class QueryTest
     {
         [Fact]
         public void ReturnsRestQuery()

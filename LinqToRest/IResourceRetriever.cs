@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Messerli.LinqToRest
 {
-    public interface IResourceRetriever
+    internal interface IResourceRetriever
     {
         Task<T> RetrieveResource<T>(Uri uri);
     }

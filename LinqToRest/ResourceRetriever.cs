@@ -14,7 +14,7 @@ namespace Messerli.LinqToRest
 {
     public delegate IQueryable<object> QueryableFactory(Type type, Uri uri);
 
-    public class ResourceRetriever : IResourceRetriever
+    internal sealed class ResourceRetriever : IResourceRetriever
     {
         private readonly HttpClient _httpClient;
 

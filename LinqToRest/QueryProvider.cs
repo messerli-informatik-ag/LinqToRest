@@ -5,9 +5,9 @@ using Messerli.QueryProvider;
 
 namespace Messerli.LinqToRest
 {
-    public delegate QueryBinder QueryBinderFactory();
+    internal delegate QueryBinder QueryBinderFactory();
 
-    public class QueryProvider : Messerli.QueryProvider.QueryProvider
+    internal sealed class QueryProvider : Messerli.QueryProvider.QueryProvider
     {
         private readonly IResourceRetriever _resourceRetriever;
         private readonly QueryBinderFactory _queryBinderFactory;

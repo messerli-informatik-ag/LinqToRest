@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Messerli.LinqToRest
 {
-    public class ProjectionReader<T> : IEnumerable<T>
+    internal sealed class ProjectionReader<T> : IEnumerable<T>
     {
         private readonly IEnumerator<T> _enumerator;
 

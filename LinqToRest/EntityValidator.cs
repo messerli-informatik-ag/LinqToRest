@@ -10,7 +10,7 @@ using System.Reflection;
 namespace Messerli.LinqToRest
 {
     [UsedImplicitly]
-    public class EntityValidator : IEntityValidator
+    internal sealed class EntityValidator : IEntityValidator
     {
         public void ValidateResourceEntity(Type type)
         {

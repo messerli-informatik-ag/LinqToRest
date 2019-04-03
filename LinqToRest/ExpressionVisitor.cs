@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace Messerli.LinqToRest
 {
-    public class ExpressionVisitor : System.Linq.Expressions.ExpressionVisitor
+    internal class ExpressionVisitor : System.Linq.Expressions.ExpressionVisitor
     {
         public override Expression Visit(Expression exp)
         {
