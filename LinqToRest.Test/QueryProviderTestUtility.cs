@@ -124,6 +124,22 @@ namespace Messerli.LinqToRest.Test
                 }
             });
 
+        public static QueryResult<object> RenamedSelectedFieldsResults => new(
+            UniqueIdentifierNameRequestUri,
+            new object[]
+            {
+                new
+                {
+                    Id = "Test1",
+                    EntityName = "Test1",
+                },
+                new
+                {
+                    Id = "Test2",
+                    EntityName = "Test2",
+                }
+            });
+
         public static QueryResult<object> NameResult => new QueryResult<object>(
             UniqueIdentifierNameRequestUri,
             new object[]

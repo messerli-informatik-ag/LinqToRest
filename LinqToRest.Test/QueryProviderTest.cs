@@ -87,5 +87,17 @@ namespace Messerli.LinqToRest.Test
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void ReturnsRestObjectWithRenamedSelectedFields()
+        {
+            var actual = new QueryResult<object>(
+                CreateQuery<EntityWithQueryableMember>()
+                    .Select(entity => new { Id = entity.UniqueIdentifier, EntityName = entity.Name }));
+
+            var expected = RenamedSelectedFieldsResults;
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
